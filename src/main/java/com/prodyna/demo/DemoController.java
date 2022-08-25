@@ -26,36 +26,36 @@ public class DemoController {
 	}
 
 	@GetMapping("/persons/{id}")
-public ResponseEntity<Person> get(@PathVariable Integer id) {
-	try {
-		Person person = repo.findById(id).get();
-		return new ResponseEntity<Person>(person, HttpStatus.OK);
-	} catch (NoSuchElementException e) {
-		return new ResponseEntity<Person>(HttpStatus.NOT_FOUND);
-	}		
-}
+	public ResponseEntity<Person> get(@PathVariable Integer id) {
+		try {
+			Person person = repo.findById(id).get();
+			return new ResponseEntity<Person> (person, HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			return new ResponseEntity<Person> (HttpStatus.NOT_FOUND);
+		}
+	}
 
-@PostMapping("/persons")
-public ResponseEntity<Person> add(@RequestBody Person person) {
-	repo.save(person);
-	return new ResponseEntity<Person>(person, HttpStatus.OK);
-}
-
-@PutMapping("/persons/{id}")
-public ResponseEntity<?> update(@RequestBody Person person, @PathVariable Integer id) {
-	try {
-		Person existPerson = repo.findById(id).get();
-		person.setId(existPerson.getId());
+	@PostMapping("/persons")
+	public ResponseEntity<Person> add(@RequestBody Person person) {
 		repo.save(person);
-		return new ResponseEntity<>(HttpStatus.OK);
-	} catch (NoSuchElementException e) {
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}		
-}
+		return new ResponseEntity<Person> (person, HttpStatus.OK);
+	}
 
-@DeleteMapping("/persons/{id}")
-public void delete(@PathVariable Integer id) {
-	repo.deleteById(id);
-}
+	@PutMapping("/persons/{id}")
+	public ResponseEntity<? > update(@RequestBody Person person, @PathVariable Integer id) {
+		try {
+			Person existPerson = repo.findById(id).get();
+			person.setId(existPerson.getId());
+			repo.save(person);
+			return new ResponseEntity<>(HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@DeleteMapping("/persons/{id}")
+	public void delete(@PathVariable Integer id) {
+		repo.deleteById(id);
+	}
 
 }

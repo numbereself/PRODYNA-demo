@@ -9,35 +9,34 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Person {
-  @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-  @Size(min=3, max=20)
-  @NotNull
+	@Size(min = 3, max = 20)
+	@NotNull
 	private String name;
 
-	public Person() {
-	}
+	public Person() {}
 
 	public Person(Integer id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-  public Integer getId() {
-    return id;
-  }
+	public Integer getId() {
+		return id;
+	}
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-  public String getName() {
-    return name;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }
